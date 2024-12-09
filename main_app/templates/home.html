@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>ברוכים הבאים ל-Commander Persky</h1>
+    <div class="game-intro">
+        <p>משחק אסטרטגיה מרתק המשלב קרבות צבאיים ותכנון טקטי</p>
+        <a href="{% url 'download' %}" class="btn btn-primary">הורדת המשחק</a>
+    </div>
+    
+    <section class="game-features">
+        <h2>תכונות עיקריות</h2>
+        <ul>
+            <li>מערכת קרב מתקדמת</li>
+            <li>תרחישים היסטוריים מרתקים</li>
+            <li>גרפיקה ממוחשבת מרשימה</li>
+        </ul>
+    </section>
+</div>
+{% endblock %}

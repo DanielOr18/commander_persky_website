@@ -1,0 +1,103 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .terms-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: rgba(10, 20, 30, 0.8);
+        border-radius: 20px;
+        box-shadow: 0 15px 50px rgba(0, 255, 0, 0.1);
+        color: #c0c0c0;
+        line-height: 1.7;
+    }
+    .terms-title {
+        color: var(--neon-green);
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    .terms-content {
+        font-size: 0.9rem;
+        text-align: justify;
+    }
+    .terms-content h3 {
+        color: var(--neon-green);
+        margin-top: 20px;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+    .terms-content p {
+        margin-bottom: 15px;
+    }
+    .copyright-notice {
+        margin-top: 30px;
+        font-style: italic;
+        text-align: center;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="terms-container">
+        <h1 class="terms-title">Terms of Use and Limitation of Liability</h1>
+        
+        <div class="terms-content">
+            <h3>1. Copyright</h3>
+            <p>© All rights reserved by Daniel Or, developer of Commander Persky</p>
+            
+            <h3>2. General Definitions</h3>
+            <p>2.1 "The Game" refers to Commander Persky in its current and future versions.</p>
+            <p>2.2 "User" refers to any person who downloads, installs, or plays the game.</p>
+            
+            <h3>3. Limitation of Liability</h3>
+            <p>3.1 The game is provided "as is" without any express or implied warranties.</p>
+            <p>3.2 The developer is not responsible for any direct, indirect, consequential, or special damages arising from the use of the game.</p>
+            <p>3.3 There is no guarantee of full, continuous, or error-free performance of the game.</p>
+            
+            <h3>4. User Responsibility</h3>
+            <p>4.1 The user bears full responsibility for the correct installation and operation of the game.</p>
+            <p>4.2 The user commits to using the game legally, ethically, and in accordance with all applicable laws.</p>
+            <p>4.3 The game must not be used for illegal or harmful purposes.</p>
+            
+            <h3>5. Intellectual Property Rights</h3>
+            <p>5.1 All code, design, graphics, sounds, and content in the game are the exclusive property of Daniel Or.</p>
+            <p>5.2 Absolute prohibition on copying, reproducing, distributing, selling, or commercial use without explicit written permission.</p>
+            <p>5.3 Any attempt to copy or modify the game constitutes a copyright infringement.</p>
+            
+            <h3>6. Usage Limitations</h3>
+            <p>6.1 The game is intended for ages 10 and above.</p>
+            <p>6.2 The game must not be used in a way that may impair its functionality or the experience of other users.</p>
+            
+            <h3>7. Changes to Terms of Use</h3>
+            <p>7.1 The developer reserves the right to change these terms at any time without prior notice.</p>
+            <p>7.2 Continued use of the game after changes constitutes acceptance of the new terms.</p>
+            
+            <h3>8. Limitation of Remedies</h3>
+            <p>8.1 The developer's maximum liability is limited to the download value of the game (₪0).</p>
+            <p>8.2 The user waives any claim exceeding this amount.</p>
+            
+            <h3>9. Governing Law and Jurisdiction</h3>
+            <p>9.1 These terms shall be interpreted and governed by the laws of the State of Israel.</p>
+            <p>9.2 Exclusive jurisdiction is vested in the courts of Tel Aviv-Jaffa District.</p>
+            
+            <h3>10. Privacy Statement</h3>
+            <p>10.1 The game does not collect personal information without explicit consent.</p>
+            <p>10.2 Any use of information will be in accordance with privacy protection laws.</p>
+        </div>
+        
+        <div class="copyright-notice">
+            Copyright Notice: © 2024 Daniel Or. All rights reserved.<br>
+            Commander Persky™ is a trademark of Daniel Or.<br>
+            Acknowledgment: Use of the game constitutes acceptance of these terms.
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,499 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block head %}
+    {{ block.super }}
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link href="{% static 'game_details.css' %}" rel="stylesheet">
+    <style>
+        body, html, div, p, h1, h2, h3, h4, h5, h6 {
+            font-family: 'Audiowide', cursive !important;
+        }
+    </style>
+{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    .game-screenshots {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: rgba(10, 20, 30, 0.8);
+        border-radius: 15px;
+        box-shadow: 0 15px 50px rgba(0, 255, 0, 0.2);
+    }
+
+    .game-screenshots h2 {
+        color: var(--neon-green);
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    /* Completely remove navigation arrows */
+    .lightbox-prev, 
+    .lightbox-next, 
+    .lightbox-prev:hover, 
+    .lightbox-next:hover {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    /* מחיקת כל סגנון הקשור לסרטונים */
+    .game-videos,
+    .video-gallery,
+    .video-row,
+    .video-item-container,
+    .video-item-title,
+    .video-item,
+    .video-play-overlay,
+    .video-lightbox,
+    .video-lightbox-content,
+    .video-lightbox-close {
+        all: unset;
+    }
+
+    .screenshot-gallery {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid var(--neon-blue);
+        box-shadow: 0 0 15px rgba(0, 51, 204, 0.5);
+    }
+
+    .screenshot-row {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .screenshot-item {
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .screenshot-item img {
+        width: 200px;
+        height: 150px;
+        object-fit: contain;
+        cursor: pointer;
+        border-radius: 10px;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        image-rendering: pixelated;
+    }
+
+    .screenshot-item:hover {
+        transform: scale(1.05);
+    }
+
+    .screenshot-item img:hover {
+        border-color: var(--neon-green);
+    }
+
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .lightbox-content {
+        position: absolute;
+        max-width: 90%;
+        max-height: 90%;
+        transition: all 0.3s ease;
+    }
+
+    .lightbox-content img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: -30px;
+        right: 0;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .video-thumbnails-container {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+        padding: 20px;
+        border: 2px solid var(--neon-blue);
+    }
+
+    .video-thumbnail {
+        width: 300px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+    .video-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .video-thumbnail:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    }
+
+    .video-thumbnail-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .video-thumbnail-title {
+        color: var(--neon-green);
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+</style>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .screenshot-gallery {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid var(--neon-blue);
+        box-shadow: 0 0 15px rgba(0, 51, 204, 0.5);
+    }
+
+    .screenshot-row {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .screenshot-item {
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .screenshot-item img {
+        width: 200px;
+        height: 150px;
+        object-fit: contain;
+        cursor: pointer;
+        border-radius: 10px;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        image-rendering: pixelated;
+    }
+
+    .screenshot-item:hover {
+        transform: scale(1.05);
+    }
+
+    .screenshot-item img:hover {
+        border-color: var(--neon-green);
+    }
+
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .lightbox-content {
+        position: absolute;
+        max-width: 90%;
+        max-height: 90%;
+        transition: all 0.3s ease;
+    }
+
+    .lightbox-content img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: -30px;
+        right: 0;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 game-section">
+        <h2>Game Details</h2>
+        <p>Commander Persky is an adventure game in style of platform games from the early 90s</p>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Genre</h4>
+                <p>Platform Game</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Developer</h4>
+                <p>Daniel Or</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Engine</h4>
+                <p class="mb-1">DanoGameLab</p>
+                <p>Developed by Dr. Dan Nirel</p>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <h3 class="mb-4">Game Screenshots</h3>
+            <div class="screenshot-gallery">
+                {% for row in screenshot_rows %}
+                    <div class="screenshot-row">
+                        {% for i in row %}
+                            <div class="screenshot-item" data-index="{{ i }}">
+                                <img src="{% static 'images/game_screenshots_thumbnails/thumb_'|add:i|add:'.jpg' %}?v=2" 
+                                     alt="Game Screenshot {{ i }}"
+                                     data-full-image="{% static 'images/game_screenshots/'|add:i|add:'.jpg' %}"
+                                     onclick="openLightbox(this)">
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div class="lightbox" onclick="closeLightbox()">
+                <div class="lightbox-content">
+                    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+                    <img src="" alt="Full Screenshot">
+                </div>
+            </div>
+        </div>
+        
+        <div class="container mt-4">
+            <h3 class="text-center mb-2">Game Videos</h3>
+            <p class="text-center mb-4" style="color: var(--neon-blue);">Short sample videos from Commander Persky</p>
+            <p class="text-center mb-4" style="color: var(--neon-green);">Watch the game in action!</p>
+            <div class="video-thumbnails-container d-flex justify-content-center align-items-center">
+                <div class="video-thumbnail-wrapper text-center mx-3">
+                    <div class="video-thumbnail-title mb-2">Crater Level</div>
+                    <div class="video-thumbnail">
+                        <a href="https://www.youtube.com/watch?v=JSVb_lJRx8k" target="_blank">
+                            <img src="{% static 'images/game_video_thumbnails/thumb_Crater.jpg' %}" 
+                                 alt="Crater Level Thumbnail" 
+                                 class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+                <div class="video-thumbnail-wrapper text-center mx-3">
+                    <div class="video-thumbnail-title mb-2">Desert Level</div>
+                    <div class="video-thumbnail">
+                        <a href="https://www.youtube.com/watch?v=S2xPKFcH7PM" target="_blank">
+                            <img src="{% static 'images/game_video_thumbnails/thumb_Desert.jpg' %}" 
+                                 alt="Desert Level Thumbnail" 
+                                 class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+                <div class="video-thumbnail-wrapper text-center mx-3">
+                    <div class="video-thumbnail-title mb-2">Iceland Level</div>
+                    <div class="video-thumbnail">
+                        <a href="https://www.youtube.com/watch?v=PiIBieNRAQA" target="_blank">
+                            <img src="{% static 'images/game_video_thumbnails/thumb_Iceland.jpg' %}" 
+                                 alt="Iceland Level Thumbnail" 
+                                 class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-videos" style="display:none;"></div>
+        <div class="video-lightbox" style="display:none;"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let currentImageIndex = 0;
+    let allImages = [];
+
+    function openLightbox(img) {
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxContent = lightbox.querySelector('.lightbox-content');
+        
+        // איסוף כל התמונות
+        allImages = Array.from(document.querySelectorAll('.screenshot-item img'));
+        
+        // מציאת האינדקס של התמונה הנוכחית
+        currentImageIndex = allImages.findIndex(el => el === img);
+        
+        // הגדרת התמונה
+        lightboxImg.src = img.dataset.fullImage;
+        
+        // המתנה לטעינת התמונה כדי לקבל את המידות המלאות
+        lightboxImg.onload = function() {
+            // חישוב גובה המסך והתאמת התמונה
+            const windowHeight = window.innerHeight;
+            const windowWidth = window.innerWidth;
+            const taskbarHeight = 40; // גובה משוער של taskbar
+            
+            // חישוב גודל מקסימלי עם התחשבות בגובה taskbar
+            const maxHeight = windowHeight - taskbarHeight - 40; // הוספת שוליים נוספים
+            const maxWidth = windowWidth - 40; // שוליים מסביב
+            
+            // קביעת גודל מקסימלי תוך שמירה על יחס גובה/רוחב
+            const imgRatio = lightboxImg.naturalWidth / lightboxImg.naturalHeight;
+            let displayWidth, displayHeight;
+            
+            if (lightboxImg.naturalHeight > maxHeight) {
+                displayHeight = maxHeight;
+                displayWidth = displayHeight * imgRatio;
+                
+                if (displayWidth > maxWidth) {
+                    displayWidth = maxWidth;
+                    displayHeight = displayWidth / imgRatio;
+                }
+            } else if (lightboxImg.naturalWidth > maxWidth) {
+                displayWidth = maxWidth;
+                displayHeight = displayWidth / imgRatio;
+            } else {
+                displayWidth = lightboxImg.naturalWidth;
+                displayHeight = lightboxImg.naturalHeight;
+            }
+            
+            // הגדרת גודל התמונה
+            lightboxContent.style.width = `${displayWidth}px`;
+            lightboxContent.style.height = `${displayHeight}px`;
+            
+            // הצגת הלייטבוקס
+            lightbox.style.display = 'flex';
+        };
+        
+        // טיפול במקרה של כישלון בטעינת התמונה
+        lightboxImg.onerror = function() {
+            // נסה את התמונה הבאה
+            changeImage(1);
+        };
+    }
+
+    function changeImage(direction) {
+        // וודא שיש תמונות
+        if (allImages.length === 0) {
+            allImages = Array.from(document.querySelectorAll('.screenshot-item img'));
+        }
+        
+        // מספר ניסיונות למציאת תמונה תקינה
+        let attempts = 0;
+        const maxAttempts = allImages.length;
+        
+        let newIndex;
+        do {
+            // עדכון האינדקס
+            currentImageIndex += direction;
+            
+            // טיפול במעבר מעגלי בין תמונות
+            if (currentImageIndex >= allImages.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = allImages.length - 1;
+            }
+            
+            // בדיקה אם התמונה תקינה
+            if (isValidImage(allImages[currentImageIndex])) {
+                newIndex = currentImageIndex;
+                break;
+            }
+            
+            attempts++;
+        } while (attempts < maxAttempts);
+        
+        // פתיחת התמונה החדשה
+        if (newIndex !== undefined) {
+            openLightbox(allImages[newIndex]);
+        }
+    }
+
+    function isValidImage(imgElement) {
+        // בדיקה אם התמונה קיימת ותקינה
+        try {
+            const img = new Image();
+            img.src = imgElement.dataset.fullImage;
+            return img.complete && img.naturalWidth !== 0;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function closeLightbox() {
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxContent = lightbox.querySelector('.lightbox-content');
+        
+        // איפוס הגודל
+        lightboxContent.style.width = '';
+        lightboxContent.style.height = '';
+        
+        // איפוס רשימת התמונות
+        allImages = [];
+        
+        // הסתרת הלייטבוקס
+        lightbox.style.display = 'none';
+    }
+
+    // מעבר בין תמונות עם חצי המקלדת
+    document.addEventListener('keydown', function(event) {
+        const lightbox = document.querySelector('.lightbox');
+        
+        // בדיקה אם הלייטבוקס פתוח
+        if (lightbox.style.display === 'flex') {
+            switch(event.key) {
+                case 'Escape':
+                    closeLightbox();
+                    break;
+                case 'ArrowRight':
+                    changeImage(1);
+                    break;
+                case 'ArrowLeft':
+                    changeImage(-1);
+                    break;
+            }
+        }
+    });
+</script>
+{% endblock %}

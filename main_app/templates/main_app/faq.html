@@ -1,0 +1,228 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .spacer {
+        height: 200px !important;  /* מרווח קבוע של 200 פיקסלים */
+        width: 100% !important;
+    }
+    .faq-container, .tips-container {
+        max-width: 900px !important;
+        margin: 40px auto !important;
+        padding: 30px !important;
+        background-color: rgba(10, 20, 30, 0.8) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 15px 50px rgba(0, 255, 0, 0.1) !important;
+    }
+    .tips-container {
+        margin-top: 500px !important;  /* הגדלנו את המרווח כדי לוודא הורדה למטה */
+    }
+    .section-title {
+        color: var(--neon-green) !important;
+        text-align: center !important;
+        margin-bottom: 40px !important;
+        font-size: 2.5rem !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+    }
+    .faq-item {
+        background-color: rgba(20, 30, 40, 0.7) !important;
+        border: 2px solid rgba(0, 255, 0, 0.2) !important;
+        border-radius: 15px !important;
+        margin-bottom: 25px !important;
+        overflow: hidden !important;
+        transition: all 0.4s ease !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+        width: 100% !important;
+    }
+    .faq-item:hover {
+        transform: scale(1.02) !important;
+        box-shadow: 0 12px 35px rgba(0, 255, 0, 0.3) !important;
+    }
+    .faq-question {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 20px !important;
+        background-color: rgba(15, 25, 35, 0.9) !important;
+        color: var(--neon-green) !important;
+        cursor: pointer !important;
+        font-weight: bold !important;
+        transition: background-color 0.3s ease !important;
+    }
+    .faq-question-text {
+        flex-grow: 1 !important;
+    }
+    .faq-toggle {
+        margin-left: 15px !important;
+        color: var(--neon-green) !important;
+        transition: transform 0.3s ease !important;
+    }
+    .faq-toggle.active {
+        transform: rotate(180deg) !important;
+    }
+    .faq-answer {
+        display: none !important;  /* מוודאים שהתשובות מוסתרות מראש */
+        padding: 25px 20px !important;
+        background-color: rgba(10, 20, 30, 0.8) !important;
+        color: #c0c0c0 !important;
+        line-height: 1.7 !important;
+        border-top: 1px solid rgba(0, 255, 0, 0.1) !important;
+    }
+    .faq-answer h5 {
+        color: var(--neon-green) !important;
+        margin-bottom: 15px !important;
+    }
+    .faq-answer p {
+        margin-bottom: 15px !important;
+    }
+    .tips-section-title {
+        color: var(--neon-green) !important;
+        text-align: center !important;
+        margin-bottom: 30px !important;
+        font-size: 2rem !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+    }
+    .tips-list {
+        max-width: 800px !important;
+        margin: 0 auto !important;
+        padding: 20px !important;
+        background-color: rgba(15, 25, 35, 0.8) !important;
+        border-radius: 15px !important;
+        color: #c0c0c0 !important;
+    }
+    .tips-list li {
+        margin-bottom: 25px !important;
+        line-height: 1.7 !important;
+        padding: 15px !important;
+        background-color: rgba(20, 30, 40, 0.7) !important;
+        border-radius: 10px !important;
+        border: 1px solid rgba(0, 255, 0, 0.1) !important;
+    }
+    .tips-list li::before {
+        content: ' ' !important;
+        margin-right: 10px !important;
+        color: var(--neon-green) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="faq-container">
+        <h1 class="section-title">FAQ</h1>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-question-text">What operating system is required to run the game?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Windows 7 and above, x64 configuration
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-question-text">Can I save the game and return to it later?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Commander Persky has two save mechanisms:</p>
+                        
+                        <h5>1) Quick Save:</h5>
+                        <p>A quick save without naming, simply press F2 anytime to save immediately (a save confirmation will appear on screen).
+                        You can load the last quick save at any point by pressing F3.</p>
+                        
+                        <p>It's important to note that you can also load the quick save from the main menu by pressing F3.
+                        (Even when restarting the game and initially reaching the main menu, you can load the save by pressing F3)</p>
+                        
+                        <h5>2) Named Save:</h5>
+                        <p>Press F4 during gameplay to open a menu with 7 save slots. 
+                        Choose a slot and enter a name for your save. 
+                        To load a named save, press F5 and select from the 7 slots.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-question-text">Do points provide anything?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, throughout the game you can collect various items that grant points or "drops".</p>
+                        <p>Every 25,000 points, or every 100 drops, the player receives an additional life.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="tips-container">
+        <h2 class="tips-section-title">Tips</h2>
+        
+        <ul class="tips-list">
+            <li>Certain elements can be descended from (perform a downward jump) by pressing "Down Arrow + CTRL". 
+            These elements include elevators or specific blocks suspended in the air (not all airborne blocks allow this). 
+            This technique is crucial at certain points throughout the game.</li>
+            
+            <li>You can enter specific locations by positioning yourself at the center of the entrance and pressing the "Up Arrow". 
+            For example, entering a cave, an igloo, or a volcano.</li>
+            
+            <li>You can look far up or down by continuously pressing the "Up/Down Arrow". 
+            This provides a wider field of view, allowing you to plan your next actions before executing them.</li>
+            
+            <li>To activate switches (such as a switch that activates an elevator), stand in its center and press the "Up Arrow".</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            const toggle = item.querySelector('.faq-toggle');
+            
+            // וודאו שהתשובות מוסתרות מראש
+            answer.style.display = 'none';
+            
+            question.addEventListener('click', function() {
+                // סגירת כל התשובות הפתוחות האחרות
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.querySelector('.faq-answer').style.display = 'none';
+                        otherItem.querySelector('.faq-toggle').classList.remove('active');
+                        otherItem.querySelector('.faq-toggle').textContent = '▼';
+                    }
+                });
+                
+                // החלפת מצב התשובה הנוכחית
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    toggle.classList.remove('active');
+                    toggle.textContent = '▼';
+                } else {
+                    answer.style.display = 'block';
+                    toggle.classList.add('active');
+                    toggle.textContent = '▲';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

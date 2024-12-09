@@ -1,0 +1,21 @@
+{% extends 'main_app/base.html' %}
+
+{% block content %}
+<div class="container text-center home-hero">
+    <a href="{% url 'download' %}" class="btn btn-primary download-btn" style="background-color: #0000FF !important; border: 6px solid #00ff00; box-shadow: 0 0 20px #00ff00; margin-top: 215px;">Download Now</a>
+    <div class="copyright-notice" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: white; white-space: nowrap;">&copy; 2024 Commander Persky™ by Daniel Or. All Rights Reserved.</div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .home-hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 60px);
+        margin-top: 0;
+    }
+</style>
+{% endblock %}

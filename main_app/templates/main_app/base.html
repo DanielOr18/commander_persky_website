@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Commander Persky{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Shojumaru&family=Audiowide&family=Press+Start+2P&family=VT323&family=Chakra+Petch&family=Bungee&family=Russo+One&family=Nova+Square&family=Iceland&family=Rajdhani:wght@400;500;600&family=Bangers&family=Black+Ops+One&family=Inknut+Antiqua:wght@400;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="{% static 'custom_cursor.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main_app/css/styles.css' %}">
+    <style>
+        :root {
+            --royal-blue: #4169E1;
+            --bright-green: #00FF00;
+            --neon-blue: #0033cc;
+            --neon-green: #00ff00;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Black Ops One', cursive;
+            background-color: black;
+            font-size: 18px;
+            color: white;
+        }
+        .navbar {
+            background-color: rgba(0,0,0,0.8);
+            height: 60px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--neon-blue) !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--neon-blue);
+            white-space: nowrap;
+            display: inline-block;
+        }
+        @media screen and (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+        }
+        @-moz-document url-prefix() {
+            .navbar-brand {
+                display: inline;
+                white-space: nowrap;
+                width: auto;
+            }
+        }
+        .nav-link {
+            color: white !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-green));
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .page-content {
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 80px;
+            min-height: 100vh;
+            background: transparent;
+        }
+        
+        .home-page {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('{% static "pictures/mainPic.jpg" %}');
+            background-size: 100% 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            overflow: hidden;
+        }
+        
+        .shojumaru-title {
+            font-family: 'Shojumaru', cursive;
+            white-space: nowrap;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        @-moz-document url-prefix() {
+            .shojumaru-title {
+                display: inline;
+                width: auto;
+            }
+        }
+        
+        .main-title {
+            font-family: 'Shojumaru', sans-serif;
+            font-size: 4.8rem;
+            text-align: center;
+            white-space: nowrap;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: linear-gradient(to right, 
+                var(--neon-blue) 0%,
+                var(--neon-blue) 45%,
+                var(--neon-green) 55%,
+                var(--neon-green) 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-stroke: 1.5px black;
+            text-stroke: 1.5px black;
+        }
+        @-moz-document url-prefix() {
+            .main-title {
+                display: inline;
+                width: auto;
+                font-size: 4.77rem;
+            }
+        }
+        .content-wrapper {
+            background: transparent;
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        body {
+            cursor: crosshair;
+        }
+        a, button, input, select, textarea {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="{% if request.path == '/' %}home-page{% endif %}">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Commander Persky</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'game_details' %}">Game Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'faq' %}">FAQ & Tips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'support' %}">Support</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-content {% if request.path == '/' %}home-page{% endif %}">
+        <div class="text-center">
+            <h1 class="main-title">Commander Persky</h1>
+            {% if request.path == '/' %}
+            <div class="outlined-text">
+                A brave young boy embarks on an adventure to save the world
+            </div>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="download-section text-center {% if request.path != '/' %}d-none{% endif %}">
+        <div class="save-world-text">
+            To Save The World
+        </div>
+        <div class="down-arrow">
+            &#11015; <!-- Unicode down arrow -->
+        </div>
+        <a href="#" class="btn btn-primary btn-lg download-btn">הורד עכשיו!</a>
+    </div>
+
+    <footer class="text-center text-muted mt-auto py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-start" style="margin-left: -50px;">
+                    <small style="color: white; white-space: nowrap;">&copy; 2024 Commander Persky™ by Daniel Or. All Rights Reserved.</small>
+                </div>
+                <div class="col-md-8 mx-auto">
+                    {% block footer_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% block scripts %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+        <script src="{% static 'main_app/js/custom.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,144 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block head %}
+    {{ block.super }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .support-section {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            border-radius: 15px !important;
+            padding: 30px !important;
+            border: 2px solid !important;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3) !important;
+        }
+        .contact-icons a {
+            margin: 0 15px !important;
+            font-size: 2rem !important;
+            transition: transform 0.3s ease !important;
+        }
+        .contact-icons a:hover {
+            transform: scale(1.2) !important;
+        }
+        .support-section .support-title,
+        .support-section .contact-form-title {
+            background: linear-gradient(to right, #4169E1, #00ff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+            font-size: 2.5rem;
+            display: inline-block;
+            text-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
+        }
+        .support-section .contact-form-title {
+            font-size: 2rem;
+        }
+        /* Ensure text remains visible */
+        .support-section h2, 
+        .support-section h4 {
+            color: white !important;
+        }
+        .spacer {
+            height: 100px;  
+            width: 100%;
+        }
+        .contact-email {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(15, 25, 35, 0.8);
+            border-radius: 15px;
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+        .contact-email a {
+            color: var(--neon-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-email a:hover {
+            color: #00ff7f;
+            text-decoration: underline;
+        }
+        .contact-email .email-icon {
+            margin-right: 10px;
+            color: var(--neon-green);
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-10 offset-md-1 support-section">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <h2 class="text-center mb-4 support-title">Support & Contact</h2>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h4 class="text-center mb-3 contact-form-title">Contact Form</h4>
+                <form class="contact-form" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="spacer"></div>
+    
+    <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p>
+            <i class="fas fa-envelope"></i> Email: 
+            <a href="mailto:{{ support_email }}">{{ support_email }}</a>
+        </p>
+        <p>
+            <i class="fab fa-github"></i> GitHub: 
+            <a href="https://github.com/DanielOr18" target="_blank">Daniel Or</a>
+        </p>
+        <p>
+            <i class="fab fa-linkedin"></i> LinkedIn: 
+            <a href="https://linkedin.com/in/daniel-or-a1b932340" target="_blank">Daniel Or</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+{% endblock %}

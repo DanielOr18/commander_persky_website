@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Commander Persky{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <!-- ניתן להוסיף תפריט ניווט כאן -->
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- תוכן כותרת תחתונה -->
+    </footer>
+
+    <script src="{% static 'support.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
