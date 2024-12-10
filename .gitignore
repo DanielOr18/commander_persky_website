@@ -32,30 +32,12 @@ wheels/
 *.manifest 
 *.spec 
 
-# Installer logs 
-pip-log.txt 
-pip-delete-this-directory.txt 
-
-# Unit test / coverage reports 
-htmlcov/ 
-.tox/ 
-.coverage 
-.coverage.* 
-.cache 
-.pytest_cache/ 
-nosetests.xml 
-coverage.xml 
-*.cover 
-.hypothesis/ 
-
 # Environments 
-.env 
-.venv 
-env/ 
-venv/ 
-ENV/ 
-env.bak/ 
+.env
 mysite-virtualenv/
+venv/
+ENV/
+env.bak/
 
 # Visual Studio Code # 
 .vscode/* 
@@ -66,5 +48,8 @@ mysite-virtualenv/
 .history
 
 # Personal files
+*.swp
+.DS_Store
+
+# Static and media files in production
 staticfiles/
-*.sqlite3
