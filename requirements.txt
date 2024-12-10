@@ -4,3 +4,5 @@ pytz==2023.3  # תמיכה בזמנים ואזורי זמן
 gunicorn==20.1.0
 whitenoise==6.5.0
 python-dotenv==1.0.0
+django-environ==0.10.0
+psycopg2-binary==2.9.6  # למקרה שתרצה להשתמש ב-PostgreSQL
