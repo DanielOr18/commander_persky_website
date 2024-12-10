@@ -1,3 +1,6 @@
 Django==5.1.4
 Pillow==10.1.0  # לעבודה עם תמונות
 pytz==2023.3  # תמיכה בזמנים ואזורי זמן
+gunicorn==20.1.0
+whitenoise==6.5.0
+python-dotenv==1.0.0

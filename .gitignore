@@ -55,6 +55,7 @@ env/
 venv/ 
 ENV/ 
 env.bak/ 
+mysite-virtualenv/
 
 # Visual Studio Code # 
 .vscode/* 

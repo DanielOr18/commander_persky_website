@@ -12,3 +12,23 @@ class ContactMessage(models.Model):
     
     def __str__(self):
         return f"Message from {self.name} - {self.subject}"
+
+class SiteStatistics(models.Model):
+    site_visits = models.IntegerField(default=0)
+    game_downloads = models.IntegerField(default=0)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Site visits: {self.site_visits}, Game downloads: {self.game_downloads}"
+
+    def increment_site_visit(self):
+        self.site_visits += 1
+        self.save()
+
+    def increment_game_download(self):
+        self.game_downloads += 1
+        self.save()
+
+    class Meta:
+        verbose_name = "Site Statistics"
+        verbose_name_plural = "Site Statistics"
