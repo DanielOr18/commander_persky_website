@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import FileResponse, Http404
+from django.http import Http404
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
 from .models import ContactMessage, SiteStatistics
@@ -12,6 +12,9 @@ def get_or_create_site_stats():
     מחזיר את אובייקט הסטטיסטיקות הקיים, או יוצר אחד חדש אם לא קיים
     """
     stats, created = SiteStatistics.objects.get_or_create(pk=1)
+    if created:
+        # אם זה אובייקט חדש, שמור אותו
+        stats.save()
     return stats
 
 @never_cache  # מונע קאש של הדף כך שכל טעינה תיספר
@@ -25,7 +28,7 @@ def home(request):
         'game_version': '1.0 Demo',
         'total_levels': 5
     }
-    return render(request, 'main_app/home.html', context)
+    return render(request, 'home.html', context)
 
 @never_cache
 def game_details(request):
@@ -61,19 +64,15 @@ def game_details(request):
         'screenshot_rows': screenshot_rows,
         'video_rows': video_rows
     }
-    return render(request, 'main_app/game_details.html', context)
+    return render(request, 'game_details.html', context)
 
 @never_cache
 def download(request):
     stats = get_or_create_site_stats()
     stats.increment_site_visit()
     stats.increment_game_download()
-    file_path = 'main_app/static/downloads/CommanderPerskyInstaller.exe'
-    if os.path.exists(file_path):
-        response = FileResponse(open(file_path, 'rb'))
-        response['Content-Disposition'] = 'attachment; filename="CommanderPerskyInstaller.exe"'
-        return response
-    raise Http404("File not found")
+    download_url = 'https://drive.google.com/uc?id=1ehNIn9uYc1oMVAu1U4mrWO14zFr76sDF'
+    return redirect(download_url)
 
 @never_cache
 def support(request):
@@ -124,7 +123,7 @@ def support(request):
             'recommended_cpu': '2.5 GHz Quad Core'
         }
     }
-    return render(request, 'main_app/support.html', context)
+    return render(request, 'support.html', context)
 
 @never_cache
 def faq(request):
@@ -134,7 +133,7 @@ def faq(request):
     context = {
         'title': 'FAQ & Tips - Commander Persky',
     }
-    return render(request, 'main_app/faq.html', context)
+    return render(request, 'faq.html', context)
 
 @never_cache
 def terms_and_conditions(request):
@@ -144,4 +143,4 @@ def terms_and_conditions(request):
     context = {
         'title': 'Terms and Conditions - Commander Persky',
     }
-    return render(request, 'main_app/terms_and_conditions.html', context)
+    return render(request, 'terms_and_conditions.html', context)
