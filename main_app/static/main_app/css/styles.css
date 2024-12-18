@@ -120,3 +120,87 @@
     font-size: 30px;
     cursor: pointer;
 }
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 16px;
+        min-width: 100%;
+        max-width: none;
+    }
+
+    .navbar {
+        height: auto;
+        padding: 10px 0;
+        width: 100%;
+        min-width: 100%;
+        max-width: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(0,0,0,0.95);
+        padding: 10px;
+        width: 100%;
+    }
+
+    .nav-link {
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    .page-content {
+        padding-top: 60px;
+        width: 100%;
+        min-width: 100%;
+        max-width: none;
+        position: relative;
+        left: 0;
+        right: 0;
+    }
+
+    .home-page {
+        background-size: cover;
+        width: 100%;
+        min-width: 100%;
+        max-width: none;
+    }
+
+    .container {
+        width: 100%;
+        min-width: 100%;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .screenshot-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        min-width: 100%;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .screenshot-item {
+        flex: 0 0 auto;
+        width: 300px;
+    }
+
+    .screenshot-item img {
+        width: 100%;
+        height: auto;
+    }
+}

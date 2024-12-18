@@ -26,11 +26,39 @@
         html, body {
             height: 100%;
             margin: 0;
-            overflow-x: hidden;
             font-family: 'Black Ops One', cursive;
             background-color: black;
             font-size: 18px;
             color: white;
+            min-width: 100%;
+            max-width: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            html, body {
+                min-width: 100%;
+                max-width: none;
+                position: relative;
+                left: 0;
+                right: 0;
+            }
+
+            .container {
+                min-width: 100%;
+                max-width: none;
+                padding-left: 15px;
+                padding-right: 15px;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .page-content {
+                min-width: 100%;
+                max-width: none;
+                position: relative;
+                left: 0;
+                right: 0;
+            }
         }
         .navbar {
             background-color: rgba(0,0,0,0.8);

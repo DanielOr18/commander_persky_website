@@ -9,6 +9,41 @@
         body, html, div, p, h1, h2, h3, h4, h5, h6 {
             font-family: 'Audiowide', cursive !important;
         }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .game-screenshots {
+                margin: 20px 10px;
+            }
+
+            .game-screenshots h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .screenshot-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                margin: 10px 0;
+            }
+
+            .screenshot-item {
+                flex: 0 0 auto;
+                width: 300px;
+            }
+
+            .screenshot-item img {
+                width: 100%;
+                height: auto;
+            }
+
+            .lightbox-content img {
+                max-width: 95%;
+                height: auto;
+            }
+        }
     </style>
 {% endblock %}
 
@@ -312,7 +347,7 @@
                 <div class="video-thumbnail-wrapper text-center mx-3">
                     <div class="video-thumbnail-title mb-2">Crater Level</div>
                     <div class="video-thumbnail">
-                        <a href="https://www.youtube.com/watch?v=JSVb_lJRx8k" target="_blank">
+                        <a href="https://streamable.com/8cyyyx" target="_blank">
                             <img src="{% static 'images/game_video_thumbnails/thumb_Crater.jpg' %}" 
                                  alt="Crater Level Thumbnail" 
                                  class="img-fluid">
@@ -322,7 +357,7 @@
                 <div class="video-thumbnail-wrapper text-center mx-3">
                     <div class="video-thumbnail-title mb-2">Desert Level</div>
                     <div class="video-thumbnail">
-                        <a href="https://www.youtube.com/watch?v=S2xPKFcH7PM" target="_blank">
+                        <a href="https://streamable.com/34oxmt" target="_blank">
                             <img src="{% static 'images/game_video_thumbnails/thumb_Desert.jpg' %}" 
                                  alt="Desert Level Thumbnail" 
                                  class="img-fluid">
@@ -332,7 +367,7 @@
                 <div class="video-thumbnail-wrapper text-center mx-3">
                     <div class="video-thumbnail-title mb-2">Iceland Level</div>
                     <div class="video-thumbnail">
-                        <a href="https://www.youtube.com/watch?v=PiIBieNRAQA" target="_blank">
+                        <a href="https://streamable.com/bklyp6" target="_blank">
                             <img src="{% static 'images/game_video_thumbnails/thumb_Iceland.jpg' %}" 
                                  alt="Iceland Level Thumbnail" 
                                  class="img-fluid">
