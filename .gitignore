@@ -53,3 +53,4 @@ env.bak/
 
 # Static and media files in production
 staticfiles/".env" 
+.env.production
